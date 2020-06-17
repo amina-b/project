@@ -1,4 +1,4 @@
-package main
+package accountRoutes
 
 import (
 	"encoding/json"
@@ -7,7 +7,7 @@ import (
 	"log"
 	"net/http"
 
-	"../../database/account"
+	"../../database/accountDB"
 )
 
 type User struct {
@@ -17,28 +17,21 @@ type User struct {
 	Password string
 }
 
-func main() {
-	http.HandleFunc("/users/register", HandleUsersRegister)
-
-	http.HandleFunc("/users/login", HandleUsersLogin)
-
-	log.Fatal(http.ListenAndServe(":8080", nil))
-}
-
 func HandleUsersRegister(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "this is register route")
+	fmt.Println("OVO JE REQUEST ", r)
 	reqBytes, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 	}
-	var User User
-	err = json.Unmarshal(reqBytes, &User)
+	var user User
+	err = json.Unmarshal(reqBytes, &user)
 
 	if err != nil {
 		fmt.Println(err)
 	} else {
-		fmt.Println(User)
-		account.SaveUserInTable((account.User)(User))
+		fmt.Println(user)
+		accountDB.SaveUserInTable((accountDB.User)(user))
 	}
 }
 
@@ -49,12 +42,11 @@ func HandleUsersLogin(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	var User User
-	err = json.Unmarshal(reqBytes, &User)
+	var user User
+	err = json.Unmarshal(reqBytes, &user)
 	if err != nil {
 		fmt.Println(err)
 	} else {
-		account.Login((account.User)(User))
+		accountDB.Login((accountDB.User)(user))
 	}
-
 }

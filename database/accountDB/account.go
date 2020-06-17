@@ -1,4 +1,4 @@
-package account
+package accountDB
 
 import (
 	"database/sql"
@@ -33,6 +33,7 @@ func ConnectToDb() (db *sql.DB, err error) {
 		}
 		return db, nil
 	}
+
 }
 
 func SaveUserInTable(user User) {
@@ -50,6 +51,7 @@ func SaveUserInTable(user User) {
 		defer db.Close()
 	} else {
 		fmt.Println(dbErr.Error())
+		defer db.Close()
 	}
 }
 
@@ -67,6 +69,7 @@ func FindUserInTable(user User) (foundUser User, err error) {
 			return foundUser, nil
 		}
 	}
+	defer db.Close()
 	return nul, dbErr
 }
 
@@ -78,6 +81,8 @@ func Login(user User) {
 	} else {
 		if foundUser.Username == user.Username && foundUser.Password == user.Password {
 			fmt.Println("uspjesan login")
+		} else {
+			fmt.Println("neki podatak nije tacan")
 		}
 	}
 }
