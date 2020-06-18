@@ -7,13 +7,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-type User struct {
-	User_id  int
-	Name     string
-	Username string
-	Password string
-}
-
 func ConnectToDb() (db *sql.DB, err error) {
 
 	db, err = sql.Open("mysql", "root:sifra123@@@@/")

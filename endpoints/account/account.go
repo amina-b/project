@@ -7,16 +7,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/amina-b/project/database/accountDB"
+	accountDB "github.com/amina-b/project/database/account"
 )
-
-// u novi folder modules i importujes a ne svaki put pravis
-type User struct {
-	User_id  int // UserID
-	Name     string
-	Username string
-	Password string
-}
 
 func HandleUsersRegister(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "this is register route")
