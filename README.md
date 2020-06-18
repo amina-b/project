@@ -19,7 +19,7 @@ When we built image, container is created. To run container use this command:
 ```bash
 docker run <image_name>
 ```
-To lists all running containers use: 
+To list all running containers use: 
 ```bash
 docker ps
 ```
