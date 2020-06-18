@@ -14,13 +14,9 @@ type User struct {
 	Password string
 }
 
-//enviroment varijable-- connection on DB
-var driverName string = "mysql"
-var connection string = "root:sifra123@@@@/"
-
 func ConnectToDb() (db *sql.DB, err error) {
 
-	db, err = sql.Open(driverName, connection)
+	db, err = sql.Open("mysql", "root:sifra123@@@@/")
 
 	if err != nil {
 		return nil, err
@@ -51,7 +47,6 @@ func SaveUserInTable(user User) {
 		defer db.Close()
 	} else {
 		fmt.Println(dbErr.Error())
-		defer db.Close()
 	}
 }
 

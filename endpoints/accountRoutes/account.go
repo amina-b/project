@@ -19,7 +19,6 @@ type User struct {
 
 func HandleUsersRegister(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "this is register route")
-	fmt.Println("OVO JE REQUEST ", r)
 	reqBytes, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		fmt.Println(err)
